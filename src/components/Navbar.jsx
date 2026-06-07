@@ -37,9 +37,9 @@ function Navbar() {
   return (
     <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
       <div className="nav-logo" onClick={() => scrollTo("hero")}>
-        <img src="/images/profile.jpeg" alt="Akshaya P V"
+        {/* <img src="/images/profile.jpeg" alt="Akshaya P V"
           onError={(e) => { e.target.src = "https://ui-avatars.com/api/?name=A&background=111827&color=4f8ef7&size=84"; }} />
-        <span>Akshaya P V</span>
+        <span>Akshaya P V</span> */}
       </div>
 
       <ul className="nav-links">

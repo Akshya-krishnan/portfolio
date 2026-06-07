@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import dentalImg from "../images/dental-clinic.png";
+import ecomImg from "../images/ecom.png";
 import buildSmartImg from "../images/build-smart.png";
 import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
 import "../styles/projects.css";
@@ -11,7 +12,15 @@ const projects = [
     title: "Dental Clinic Website",
     desc: "A responsive React application for dental services and appointment booking, with a clean UI and seamless user experience.",
     live: "https://dental-clinic-mrtg.vercel.app/",
-    code: "https://github.com/Akshya-krishnan/dental-clinic.git",
+    code: "https://github.com/Akshya-krishnan/dental-clinic",
+  },
+  {
+    img: ecomImg,
+    tech: ["Next.js", "Bootstrap"],
+    title: "Ecommerce Application",
+    desc: "A responsive Ecommerce application for product sales, featuring modern UI, category management, and a seamless shopping experience.",
+    live: "https://ecommerceapp-pagesrouter-bvs8qfvq2-akshaya-p-vs-projects.vercel.app/",
+    code: "https://github.com/Akshya-krishnan/ecommerceapp-pagesrouter/tree/ecomm",
   },
   {
     img: buildSmartImg,
@@ -19,42 +28,94 @@ const projects = [
     title: "Build Smart",
     desc: "A platform with Google Maps integration for location-based features, helping users find and manage construction-related services.",
     live: "https://brikzaa-build-zzre.vercel.app",
-    code: "https://github.com/sajjadabdulla/build_smart.git",
+    code: "https://github.com/sajjadabdulla/build_smart",
   },
 ];
 
 function Projects() {
-  const ref = useRef();
+  const ref = useRef(null);
+
   useEffect(() => {
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("visible"); });
-    }, { threshold: 0.12 });
-    ref.current?.querySelectorAll(".reveal, .proj-card").forEach((el) => obs.observe(el));
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    const elements =
+      ref.current?.querySelectorAll(".reveal, .proj-card") || [];
+
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
   }, []);
 
   return (
     <section id="projects" ref={ref}>
       <div className="container">
         <div className="sec-label reveal">My Work</div>
-        <h2 className="sec-title reveal reveal-delay-1">Featured Projects</h2>
-        <p className="sec-sub reveal reveal-delay-2">Real-world applications built with care for performance, design, and user experience.</p>
+
+        <h2 className="sec-title reveal reveal-delay-1">
+          Featured Projects
+        </h2>
+
+        <p className="sec-sub reveal reveal-delay-2">
+          Real-world applications built with care for performance, design, and
+          user experience.
+        </p>
+
         <div className="projects-grid">
-          {projects.map((p, i) => (
-            <div className={`proj-card reveal reveal-delay-${i}`} key={p.title}>
+          {projects.map((project, index) => (
+            <div
+              className={`proj-card reveal reveal-delay-${index}`}
+              key={project.title}
+            >
               <div className="proj-img-wrap">
-                <img src={p.img} alt={p.title} className="proj-img" />
+                <img
+                  src={project.img}
+                  alt={project.title}
+                  className="proj-img"
+                  onError={(e) => {
+                    e.target.src =
+                      "https://via.placeholder.com/600x400?text=Project+Image";
+                  }}
+                />
               </div>
+
               <div className="proj-body">
                 <div className="proj-tech-list">
-                  {p.tech.map((t) => <span className="proj-tech" key={t}>{t}</span>)}
+                  {project.tech.map((tech) => (
+                    <span className="proj-tech" key={tech}>
+                      {tech}
+                    </span>
+                  ))}
                 </div>
-                <h3 className="proj-title">{p.title}</h3>
-                <p className="proj-desc">{p.desc}</p>
+
+                <h3 className="proj-title">{project.title}</h3>
+
+                <p className="proj-desc">{project.desc}</p>
+
                 <div className="proj-links">
-                  <a href={p.live} target="_blank" rel="noreferrer" className="proj-link proj-live">
+                  <a
+                    href={project.live}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="proj-link proj-live"
+                  >
                     <FaExternalLinkAlt /> Live Demo
                   </a>
-                  <a href={p.code} target="_blank" rel="noreferrer" className="proj-link proj-code">
+
+                  <a
+                    href={project.code}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="proj-link proj-code"
+                  >
                     <FaGithub /> Source Code
                   </a>
                 </div>

@@ -66,7 +66,7 @@ function About() {
             <div className="about-stats reveal reveal-delay-3">
               {[
                 { num: "2+", label: "Years Experience" },
-                { num: "2", label: "Companies Worked" },
+                { num: "3", label: "Companies Worked" },
                 { num: "80%", label: "M.Sc Grade" },
                 { num: "20+", label: "Tech Skills" },
               ].map((s) => (

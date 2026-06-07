@@ -46,7 +46,7 @@ function Home() {
               </button>
 
               <a
-                href="https://drive.google.com/file/d/1ZbaOk2XZ6NxlFgrxV7FI716ALufIenkN/view?usp=sharing"
+                href="https://drive.google.com/file/d/14VbJJdMqrrvO7rDm3kG3YLNU6PmeM9vV/view?usp=sharing"
                 target="_blank"
                 rel="noreferrer"
                 className="btn btn-ghost"
